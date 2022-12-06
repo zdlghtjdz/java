@@ -1,0 +1,32 @@
+   
+import java.util.*;
+
+class Solution {
+public int[] solution(int[] lottos, int[] win_nums) {
+int[] answer = new int[2];
+int[] rank = {6,6,5,4,3,2,1}; // 맞춘 갯수에 따른 순위
+int zeroCount = 0; // 지워진 부분 Count
+int numCount = 0; // 맞춘 부분 Count 
+Map<Integer, Integer> map = new HashMap<>();
+
+//지워진 부분 제외하고, 나머지 숫자 map에 넣음
+ for(int i = 0; i < lottos.length; i++) { 
+        if(lottos[i] == 0) {
+            zeroCount++;
+            continue;
+        }
+        map.put(lottos[i], 1);
+    }
+// map에 당첨 번호가 있는지 확인. 있으면 당첨.
+    for(int i = 0; i < win_nums.length; i++) {
+        if(map.get(win_nums[i]) != null) { // null 체크
+            numCount++;
+        }
+    }
+// 지워진 부분 + 당첨번호 = 최대 맞은갯수
+    answer[0] = rank[numCount + zeroCount];
+// 당첨번호 = 최소 맞은갯수
+    answer[1] = rank[numCount];
+
+    return answer; // 순위를 담은 값 리턴
+}
