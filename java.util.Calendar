@@ -1,0 +1,32 @@
+package javaBible;
+
+import java.util.Calendar;
+
+public class Calender {
+
+	public static void main(String args[]) {
+		Calendar today = Calendar.getInstance();
+
+		System.out.println(today.get(Calendar.YEAR));
+		System.out.println(today.get(Calendar.MONTH)); // month 0 ~ 11 범위
+		System.out.println(today.get(Calendar.WEEK_OF_YEAR));
+		System.out.println(today.get(Calendar.WEEK_OF_MONTH));
+		System.out.println(today.get(Calendar.DATE));
+		System.out.println(today.get(Calendar.DAY_OF_YEAR));
+		System.out.println(today.get(Calendar.DAY_OF_MONTH));
+		System.out.println(today.get(Calendar.DAY_OF_WEEK)); // 일요일 : 1 , 월요일 : 2, ...
+
+		System.out.println(today.get(Calendar.MILLISECOND));
+		System.out.println(today.getActualMaximum(Calendar.DATE));
+
+		Calendar date1 = Calendar.getInstance();
+		Calendar date2 = Calendar.getInstance();
+
+		date1.set(2015, Calendar.AUGUST, 15); // month가 0 ~ 11 범위임을 조싴
+
+		long difference = (date2.getTimeInMillis() - date1.getTimeInMillis()) / 1000;
+
+		System.out.println(difference);
+		System.out.println(difference / (24 * 60 * 60));
+	}
+}
