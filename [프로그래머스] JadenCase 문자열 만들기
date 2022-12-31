@@ -1,0 +1,22 @@
+import java.util.*;
+class Solution {
+    public String solution(String s) {
+        //String answer = "";
+        StringBuilder answer = new StringBuilder();
+        String[] arr = s.split(" ");
+        
+        for(int i = 0; i < arr.length; i++) {
+            if(Character.isLetter(arr[i].charAt(0))) {
+                StringBuilder sb = new StringBuilder(arr[i].substring(0,1));
+                StringBuilder sb2 = new StringBuilder(arr[i].substring(1));
+                
+                sb.toUpperCase();
+                sb.append(sb2);
+                answer.append(sb);
+                answer.append(" ");
+            }
+        }
+        
+        return answer.toString();
+    }
+}
