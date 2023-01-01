@@ -1,0 +1,78 @@
+# 자바의 정석 - 람다와 스트림 (1)
+
+람다식 (익명 함수) - JDK 1.8부터 추가됨
+
+lambda expression → 자바가 객체 지향언어에서 함수형 언어까지 지원할 수 있게됨.
+
+```jsx
+int[] arr = new int[5];
+Arrays.setAll(arr, (i) -> (int)(Math.random()*5)+1);
+
+//해당 함수와 동일
+int method() {
+	return (int)(Math.random() * 5) + 1;
+}
+```
+
+※ 메소드와 함수의 차이
+
+- 자바에서 함수는 반드시 객체에 속해야하므로, method라고 표현
+    
+    하지만, 람다식을 통해 메소드가 독립적 기능이 가능하므로 함수라는 용어 사용가능.
+    
+
+람다식 작성 방법
+
+```java
+// 1. 매개변수 타입 선언
+(int a, int b) -> {
+	return a > b ? a : b;
+}
+
+// 2. return문 생략
+(int a, int b) -> a > b ? a : b
+
+//3. 매개변수 생략
+(a, b) -> a > b ? a : b
+```
+
+매개변수를 생략할 때는, 모두 생략해야 한다.
+
+람다식은 익명 클래스의 객체와 동일하다.
+
+```java
+(int a, int b) -> a > b ? a : b
+
+new Object() {
+	int max(int a, int b) {
+		return a > b ? a : b;
+	}
+}
+```
+
+람다식을 참조하기 위한 변수의 타입?
+
+참조형이므로 인터페이스 혹은 클래스가 가능함.
+
+```java
+interface MyFunction() {
+	public abstract int max(int a, int b);
+} //max를 구현해서 사용해야함.
+
+//구현 부
+MyFunction f = new MyFunction() {
+	public int max(int a, int b) {
+		return a > b ? a : b;
+	}
+}
+
+//람다 식
+MyFunction f = (int a, int b) -> a > b ? a : b;
+
+// 다음과 같이 사용 가능.
+int big = f.max(5, 3);
+```
+
+MyFunction 인터페이스를 구현한 익명 객체를 람다식으로 대체가 가능한 이유는, 람다식 도 익명 객체이고, MyFunction 인터페이스를 구현한 익명 객체의 메서드 max와 매개변수 타입과 개수 그리고 반환값이 일치하기 때문.
+
+이로서 다음과 같은 함수를 람다식으로 대체 가능
