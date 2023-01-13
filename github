@@ -1,0 +1,38 @@
+package github;
+
+import java.io.IOException;
+
+import org.kohsuke.github.GHCommit;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
+
+public class GithubApi {
+	
+	
+	private GitHub github;
+	private String token = "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"; // 개인 API 키
+	
+	public String getToken() {
+		return token;
+	}
+	
+	public void connectToGithub(String token) throws IOException {
+		
+		github = new GitHubBuilder().withOAuthToken(token).build();
+		github.checkApiUrlValidity();
+		
+	}
+	
+	public String getApiUrl() {
+		return github.getApiUrl();
+	}
+	
+	public void getCommit() throws IOException {
+		GHRepository ghr = github.getRepository("zdlghtjdz/java");
+		GHCommit ghc = ghr.getCommit("2867f5d7d5cdee6be7e129ac749f0c6d6101ddff");
+		System.out.println(ghc.getAuthor());
+	}
+	
+	
+}
