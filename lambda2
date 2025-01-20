@@ -28,6 +28,7 @@ public class lambda {
 		
 		map.forEach((k,v)->System.out.print("{"+k+","+v+"}"));
 		System.out.println();
+		// git commit test;
 	}
 
 }
